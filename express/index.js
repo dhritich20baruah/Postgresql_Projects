@@ -39,11 +39,7 @@ app.get('/', async(req, res)=>{
     const data = await pool.query(`SELECT * FROM todo WHERE date = '2023-08-28'`);
     res.render('index', {data: data.rows})
 })
-app.post('/filter', async(req, res)=>{
-    const {date} = req.body
-    const data = await pool.query(`SELECT * FROM todo WHERE date = '${date}'`);
-    res.render('filter', {data: data.rows})
-})
+
 
 //ADD TODO ENDPOINT
 app.post('/addTodo', async(req, res)=>{

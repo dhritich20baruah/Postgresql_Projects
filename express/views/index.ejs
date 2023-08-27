@@ -21,10 +21,6 @@
     </form>
 
     <div class="display-todos container my-5">
-        <form method="post" action="/filter" class="my-3">
-            <input type="date" class="form-control" id="date" name="date">
-            <button class="btn btn-warning" type="submit">FILTER</button>
-        </form>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <% if(data.length>0){ %>
                 <% for(let i=0; i<data.length; i++){ %>
