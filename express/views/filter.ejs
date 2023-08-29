@@ -8,26 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body>
-    <form action="/addTodo" method="post" class="container">
-        <div class="mb-3">
-            <label for="todo" class="form-label">ADD TODO</label>
-            <input type="text" class="form-control" id="todo" name="todo" autocomplete="off">
-        </div>
-        <div class="mb-3">
-            <label for="date" class="form-label">DATE</label>
-            <input type="date" class="form-control" id="date" name="date">
-        </div>
-        <button class="btn btn-warning" type="submit">SUBMIT</button>
-    </form>
-
-    <div class="container">
-      <form action="\filter" method="post">
-        <label for="date" class="form-label">Filter by date</label>
-        <input type="date" class="form-control" id="date" name="date">
-        <button type="submit" class="btn btn-success">Filter</button>
-      </form>
-    </div>
-
+  <a href="/"><button class="btn btn-primary">HOME</button></a>
     <div class="display-todos container my-5">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <% if(data.length>0){ %>
@@ -38,12 +19,8 @@
                   <h5 class="card-title"><%= data[i].date %></h5>
                   <p class="card-text"><%= data[i].todo %></p>
                   <p>
-                    <a href="/delete/<%= data[i].id%>">
-                      <button class="btn btn-danger m-1"><i class="material-icons">delete</i></button>
-                    </a>
-                    <a href="/edit/<%= data[i].id%>">
-                      <button class="btn btn-primary m-1"><i class="material-icons">border_color</i></button>
-                    </a>
+                    <button class="btn btn-danger m-1"><i class="material-icons">delete</i></button>
+                    <button class="btn btn-primary m-1"><i class="material-icons">border_color</i></button>
                   </p>
                 </div>
               </div>

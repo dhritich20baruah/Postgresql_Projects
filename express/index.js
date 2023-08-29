@@ -35,11 +35,17 @@ app.use('/static', express.static('static'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+//READ
 app.get('/', async(req, res)=>{
-    const data = await pool.query(`SELECT * FROM todo WHERE date = '2023-08-28'`);
+    const data = await pool.query(`SELECT * FROM todo ORDER BY date`);
     res.render('index', {data: data.rows})
 })
-
+//FILTER
+app.post('/filter', async(req, res)=>{
+    const searchDate = req.body.date
+    const data = await pool.query(`SELECT * FROM todo WHERE date='${searchDate}'`);
+    res.render('filter', {data: data.rows})
+})
 
 //ADD TODO ENDPOINT
 app.post('/addTodo', async(req, res)=>{
@@ -54,6 +60,34 @@ app.post('/addTodo', async(req, res)=>{
         console.log('Error in adding todo');
         res.status(500).json({error: 'Internal Server Error'})
     }
+})
+
+//UPDATE
+app.get('/edit/:id', async (req,res)=>{
+    const id = req.params.id;
+    const data = await pool.query('SELECT * FROM todo WHERE id = $1', [id])
+    res.render('edit', {data: data.rows})
+})
+
+app.post('/update/:id', async(req, res)=>{
+    const id = req.params.id;
+    const {todo, date} = req.body
+
+    try{
+        await pool.query(`UPDATE todo SET todo = $1, date = $2 WHERE id = $3`, [todo, date, id])
+        res.redirect('/')
+    }
+    catch(error){
+        console.error('Error updating todo:', error);
+        res.status(500).json({error: 'Internal Server Error'})
+    }
+})
+
+//DELETE
+app.get('/delete/:id', async (req, res)=>{
+    const id = req.params.id;
+    await pool.query('DELETE FROM todo WHERE id = $1', [id])
+    res.redirect('/')
 })
 
 app.listen(PORT, ()=>{console.log(`Server started at port ${PORT}`)})
