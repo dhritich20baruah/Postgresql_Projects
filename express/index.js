@@ -11,16 +11,17 @@ const pool = new Pool({
     host: process.env.HOST_NAME,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
-    dialect: process.env.DIALECT,
+    dialect: process.env.DIALECT, 
     port: process.env.PORT_NUMBER
 })
 
-pool.connect((err, client, release)=>{
+// The code connects to the database using a connection pool and checks whether the connection is successful by executing a simple query to get the current timestamp 
+pool.connect((err, client, release)=>{// This line initiates a connection to the database using a connection pool. A connection pool is a cache of database connections maintained so that the connections can be reused when needed, which is more efficient than opening and closing a new connection for each database interaction.
     if(err){
         return console.error('Error in connection')
     }
     client.query('SELECT NOW()', (err, result)=>{
-        release()
+        release() //After the query is executed, the release function is called to release the connection back to the pool. This ensures that the connection is not kept open and can be reused by other parts of the application.
         if(err){
             return console.error('Error executing query')
         }
