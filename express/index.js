@@ -1,6 +1,9 @@
+//Hello and welcome in this video We will be building a CRUD application using express server and postgresql as database. We will see how to connect to the database.Then build REST API endpoints to send queries to postgres and manage results of those queries. So let's get started.
+//pg is a Node.js library that provides a PostgreSQL client for interacting with PostgreSQL databases. It helps express interact with postgres just like what mongoose does for mongodb and express
+
 const express = require('express');
 const app = express();
-const Pool = require('pg').Pool;
+const Pool = require('pg').Pool; // The Pool class is a key component of the pg library, and it's used to manage a pool of database connections.
 const path = require('path');
 const ejs = require('ejs');
 const PORT = 3000;
