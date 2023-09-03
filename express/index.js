@@ -9,6 +9,7 @@ const ejs = require('ejs');
 const PORT = 3000;
 require('dotenv').config();
 
+//We will be creating a new instance of a connection pool for a PostgreSQL database using the pg library. This code will establish a database connection with environment variables for configuration.
 const pool = new Pool({
     user: process.env.USER_NAME,
     host: process.env.HOST_NAME,
@@ -18,13 +19,13 @@ const pool = new Pool({
     port: process.env.PORT_NUMBER
 })
 
-// The code connects to the database using a connection pool and checks whether the connection is successful by executing a simple query to get the current timestamp 
+// Now we will connect to the database using a connection pool and checks whether the connection is successful by executing a simple query to get the current timestamp 
 pool.connect((err, client, release)=>{// This line initiates a connection to the database using a connection pool. A connection pool is a cache of database connections maintained so that the connections can be reused when needed, which is more efficient than opening and closing a new connection for each database interaction.
     if(err){
         return console.error('Error in connection')
     }
     client.query('SELECT NOW()', (err, result)=>{
-        release() //After the query is executed, the release function is called to release the connection back to the pool. This ensures that the connection is not kept open and can be reused by other parts of the application.
+        release() //After the query is executed, the release function is called to release the connection back to the pool. This ensures that the connection is not kept open and can be reused by other parts of the application. 
         if(err){
             return console.error('Error executing query')
         }
