@@ -20,7 +20,7 @@ const pool = new Pool({
 })
 
 // Now we will connect to the database using a connection pool and checks whether the connection is successful by executing a simple query to get the current timestamp 
-pool.connect((err, client, release)=>{// This line initiates a connection to the database using a connection pool. A connection pool is a cache of database connections maintained so that the connections can be reused when needed, which is more efficient than opening and closing a new connection for each database interaction.
+pool.connect((err, client, release)=>{// This line initiates a connection to the database using a connection pool.
     if(err){
         return console.error('Error in connection')
     }
