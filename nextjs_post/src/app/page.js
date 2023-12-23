@@ -53,7 +53,7 @@ export default async function Home() {
         <input type="date"
         name='date'
         id='date' placeholder='Add date' className="shadow-lg rounded-md shadow-black h-10 p-3 w-[100%]" />
-        <button type="submit" className="bg-orange-500 font-bold text-white hover:bg-red-600 p-3 rounded-md">SUBMIT</button>
+        <button type="submit" className="bg-orange-500 font-bold text-white hover:bg-red-600 p-3 rounded-md shadow-lg shadow-orange-400 hover:shadow-red-400">SUBMIT</button>
       </form>
     </div>
 
@@ -66,11 +66,11 @@ export default async function Home() {
             <li className="text-center w-[30%]">{element.date}</li>
             <li className=" flex text-center w-[20%]">
               <Link href={"/edit/"+element.id}>
-              <button className="bg-cyan-600 font-bold text-white p-2">EDIT</button>
+              <button className="bg-cyan-600 font-bold text-white p-2 mx-2 rounded-md shadow-lg shadow-cyan-400">EDIT</button>
               </Link>
               <form action={deleteNote}>
               <input type="hidden" name="id" value={element.id}/>
-              <button className="bg-red-600 font-bold text-white p-2" type="submit">DEL</button>
+              <button className="bg-red-600 font-bold text-white p-2 rounded-md shadow-lg shadow-red-400" type="submit">DEL</button>
               </form>
             </li>
           </ul>
